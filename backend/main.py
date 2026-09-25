@@ -13,10 +13,10 @@ from fastapi import Depends, FastAPI, HTTPException, WebSocket, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from backend.digital_twin.simulator import get_simulation_engine
-from backend.services.event_service import get_event_engine, get_event_injector
-from backend.services.orchestrator import SimulationOrchestrator
-from backend.services.prediction_service import get_prediction_service
+from digital_twin.simulator import get_simulation_engine
+from services.event_service import get_event_engine, get_event_injector
+from services.orchestrator import SimulationOrchestrator
+from services.prediction_service import get_prediction_service
 
 # Configure logging
 logging.basicConfig(
