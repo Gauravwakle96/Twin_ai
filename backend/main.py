@@ -4,19 +4,26 @@ Digital Twin for Aurangabad Smart Waste Management
 """
 
 import asyncio
+import os
+import sys
 from datetime import datetime
 import json
 import logging
 from typing import Dict, List, Optional
 
+# Ensure the project root is on sys.path so absolute imports
+# (e.g. `from backend.digital_twin.simulator import ...`) work regardless
+# of the working directory the server is launched from.
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from fastapi import Depends, FastAPI, HTTPException, WebSocket, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 
-from digital_twin.simulator import get_simulation_engine
-from services.event_service import get_event_engine, get_event_injector
-from services.orchestrator import SimulationOrchestrator
-from services.prediction_service import get_prediction_service
+from backend.digital_twin.simulator import get_simulation_engine
+from backend.services.event_service import get_event_engine, get_event_injector
+from backend.services.orchestrator import SimulationOrchestrator
+from backend.services.prediction_service import get_prediction_service
 
 # Configure logging
 logging.basicConfig(
