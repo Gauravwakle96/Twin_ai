@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://ai-waste-twin-backend.onrender.com/api/$1"
+    },
+    {
+      "src": "/ws",
+      "dest": "wss://ai-waste-twin-backend.onrender.com/ws"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
