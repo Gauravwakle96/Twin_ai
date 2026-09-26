@@ -8,6 +8,7 @@ services:
     buildCommand: pip install -r requirements.txt
     # FastAPI is an ASGI app, so we use uvicorn (not gunicorn/WSGI).
     startCommand: uvicorn main:app --host 0.0.0.0 --port 8000
+    # (gunicorn is a WSGI server and cannot serve FastAPI directly)
     envVars:
       - key: PYTHON_VERSION
         value: "3.14"
