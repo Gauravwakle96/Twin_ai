@@ -3,18 +3,18 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": "vite",
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "https://ai-waste-twin-backend.onrender.com/api/$1"
+      "source": "/api/(.*)",
+      "destination": "https://ai-waste-twin-backend.onrender.com/api/$1"
     },
     {
-      "src": "/ws",
-      "dest": "wss://ai-waste-twin-backend.onrender.com/ws"
+      "source": "/ws",
+      "destination": "wss://ai-waste-twin-backend.onrender.com/ws"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
