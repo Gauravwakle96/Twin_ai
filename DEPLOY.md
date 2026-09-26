@@ -1,16 +1,19 @@
 # Deployment Instructions
 
 ## Render (Backend)
-1. Create a **Web Service** in Render, connect your GitHub repo.
-2. Set **Root Directory** to `backend`.
-3. Set **Start Command** to:
+The service is configured with **Root Directory = repo root** (so the working
+directory at runtime is `/opt/render/project/src/`, not `backend/`).
+
+1. In your Render Web Service, set the **Start Command** to:
    ```
-   gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 120 wsgi:app
+   gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 120 backend.wsgi:app
    ```
-   (Use `wsgi:app` — NOT `backend.main:app` — because the Root Directory is `backend`, so the working directory is already inside `backend/`.)
-4. Set **Build Command** to `pip install -r requirements.txt`.
-5. Deploy.
+   Use `backend.wsgi:app` (not `wsgi:app` and not `backend.main:app`).
+   `backend/wsgi.py` inserts the project root onto `sys.path` so the absolute
+   imports inside `backend/main.py` resolve no matter the working directory.
+2. **Build Command**: `pip install -r backend/requirements.txt`
+3. Deploy.
 
 ## Vercel (Frontend)
-- Import the same repo, set **Root Directory** to `frontend`, framework `Vite`, and deploy.
-- Set the environment variable `VITE_API_URL` to your Render service URL.
+- Import the same repo, set **Root Directory** to `frontend`, framework `Vite`.
+- Set environment variable `VITE_API_URL` to your Render service URL.
