@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // Vite injects import.meta.env at build time
 const API_BASE = import.meta.env.VITE_API_URL ?? '/api';
-const WS_BASE = import.meta.env.VITE_WS_URL ?? `ws://${window.location.hostname}:8000/ws`;
+const WS_BASE = import.meta.env.VITE_WS_URL ?? `${window.location.protocol.replace("http", "ws")}${window.location.host}/ws`;
 
 const api = axios.create({
   baseURL: API_BASE,
