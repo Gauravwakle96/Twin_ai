@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: ai-wastetwin-backend
+    env: python
+    region: oregon
+    plan: free
+    rootDirectory: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:8000 --workers 1 --threads 8 --timeout 120 main:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.14"
