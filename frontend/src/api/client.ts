@@ -65,6 +65,7 @@ export interface Bin {
   decision?: string;
   is_anomalous?: boolean;
   anomaly_reason?: string;
+  growth_rate_pct_per_hour?: number;
 }
 
 export interface Truck {
