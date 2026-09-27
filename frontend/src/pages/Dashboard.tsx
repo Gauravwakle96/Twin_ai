@@ -22,6 +22,10 @@ const Dashboard: React.FC = () => {
   const truckStats = useTruckStats();
   const { events } = useEvents();
   const bins = useAppSelector((state) => state.bins);
+  const trucks = useAppSelector((state) => state.trucks);
+  const totalDistance = useAppSelector((state) => state.metrics.total_distance_km);
+  const totalFuel = useAppSelector((state) => state.metrics.total_fuel_liters);
+  const totalCO2 = useAppSelector((state) => state.metrics.total_co2_kg);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -43,11 +47,8 @@ const Dashboard: React.FC = () => {
   // Calculate dynamic metrics
   const criticalBins = Object.values(bins).filter((b: any) => b.current_fill_pct >= 80).length;
   const highPriorityBins = Object.values(bins).filter((b: any) => (b.priority_score || 0) >= 70).length;
-  const activeTrucks = Object.values(bins).filter((t: any) => t.status === 'enroute' || t.status === 'collecting').length;
+  const activeTrucks = Object.values(trucks).filter((t: any) => t.status === 'enroute' || t.status === 'collecting').length;
   const avgFill = Object.values(bins).reduce((s: number, b: any) => s + b.current_fill_pct, 0) / (Object.values(bins).length || 1);
-  const totalDistance = useAppSelector((state) => state.metrics.total_distance_km);
-  const totalFuel = useAppSelector((state) => state.metrics.total_fuel_liters);
-  const totalCO2 = useAppSelector((state) => state.metrics.total_co2_kg);
 
   return (
     <Box sx={{ p: 3, bgcolor: 'var(--bg)', minHeight: 'calc(100vh - 64px)' }}>
